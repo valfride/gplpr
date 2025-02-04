@@ -55,7 +55,7 @@ class Ocr_images_lp(Dataset):
                 A.MultiplicativeNoise(multiplier=(0.9, 1.1), per_channel=True, elementwise=True, always_apply=True, p=1.0),
                 A.Affine(scale={'x': (0.9, 1.1), 'y': (0.9, 1.1)}, translate_percent={'x': (-0.15, 0.15), 'y': (-0.15, 0.15)}, rotate=(-10, 10), shear={'x': (-10, 10), 'y': (-10, 10)}, mode=cv2.BORDER_CONSTANT, cval=self.background, fit_output=True, keep_ratio=True, p=1.0, always_apply=True),
                 A.SafeRotate(limit=15, value=(127, 127, 127), border_mode=cv2.BORDER_CONSTANT, p=1.0, always_apply=True),
-                # A.RandomShadow(shadow_roi=(0.1, 0.1, 0.9, 0.9), num_shadows_lower=1, num_shadows_upper=4, shadow_dimension=6, p=1.0, always_apply=True),
+
                 A.Posterize(num_bits=4, always_apply=True, p=1.0),
                 A.Equalize(mode='cv', by_channels=True, mask=None, mask_params=(), always_apply=True, p=1.0),
                 A.RandomBrightnessContrast(brightness_limit=0.2, contrast_limit=0.2, brightness_by_max=True, always_apply=True, p=1.0),
