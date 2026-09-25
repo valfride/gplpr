@@ -2,6 +2,18 @@
 
 Unofficial implementation of the OCR model proposed by Liu et al. in the paper *"Irregular License Plate Recognition via Global Information Integration."*
 
+## Environment setup
+
+A CUDA-capable PyTorch installation is recommended for training and evaluation.
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Pre-trained weights are available from the repository's [GitHub Releases](https://github.com/valfride/gplpr/releases/tag/Pre-trained_models).
+
 # Dataset
 
 The [RodoSol-ALPR](https://github.com/raysonlaroca/rodosol-alpr-dataset) dataset is a valuable resource for research in Automatic License Plate Recognition (ALPR). It contains 20,000 images of various vehicle types, including cars and motorcycles, captured under different conditions — day and night, across multiple toll stations, and during both clear and rainy weather.
@@ -28,25 +40,27 @@ model_ocr:
 Once the configuration is set, execute the following command to start the test:
 
 ```
-python3 test_ocr.py --config ./config/testing.yaml --save True --tag example
+python3 test_ocr.py --config ./config/GP_LPR_RODOSOL_test.yaml --save True --tag example
 ```
 
 ## Training from Scratch
 
-To train the model from scratch, update the following variables in the [config file](config/training.yaml):
+To train the model from scratch, update the following variable in the [RodoSol training config](config/GP_LPR_RODOSOL_train.yaml):
 
 ```yaml
 resume: null
 ```
 
-Optionally, you can add the --tag argument for versioning:
-```
-python3 train.py --config ./config/training.yaml --save True
+Run training with:
+
+```bash
+python3 train.py --config ./config/GP_LPR_RODOSOL_train.yaml --save True
 ```
 
-Optionally, you can add the --tag argument, for versioning:
-```
-python3 train.py --config ./config/training.yaml --save True --tag example
+Optionally, add a tag to identify the run:
+
+```bash
+python3 train.py --config ./config/GP_LPR_RODOSOL_train.yaml --save True --tag example
 ```
 
 ## Training on a Custom Dataset
